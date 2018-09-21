@@ -1,0 +1,25 @@
+1. Python安装及环境变量配置
+
+从官网www.python.org可以下载Python的各个平台的安装包，安装时请务必勾选“add pip to path”，默认安装在C盘根目录下，把安装途径拷贝下来，建议您保存到一个txt文档中，因为可能会多次用到。进入“控制面板→系统→高级系统设置→环境变量→path”,双击path，转到末尾，输入分号。粘贴刚才的路径，输入分号，再粘贴一次路径，在末尾加上“\scripts”。保存。比如我的安装路径是：
+
+“C:\Users\watersir zhangga\AppData\Local\Programs\Python\Python35-32”，那么其实我需要在path末尾添加的字符串是：
+
+C:\Users\watersir zhangga\AppData\Local\Programs\Python\Python35-32; C:\Users\watersir zhangga\AppData\Local\Programs\Python\Python35-32\scripts
+
+如果以上步骤成功，同时按下“win”键（小窗户）和“R”键，输入“cmd”，回车。此时进入命令提示符界面，输入“python”回车，会显示安装好的Python的版本并进入Python交互环境。输入“exit()”回车，退出Python交互环境。输入“pip”并回车，会显示pip的各种信息。
+
+2. 模块安装及编译器配置
+
+以安装numpy和matplotlib两个模块为例，以下提供三种安装方法：
+
+① 通过pip命令安装
+
+假如之前的pip配置好，此时可以简单地通过pip命令安装。按下win+R，输入cmd并回车，进入命令提示符界面。输入：pip install numpy，回车，可以自动安装numpy模块。输入：pip install matplotlib，回车，可以自动安装matplotlib模块。pip命令固然简单，但是从我的实践看，bug不少，失败的概率比较大。假如失败了，可以尝试以下的方法。
+
+② 下载好包通过dos命令安装
+
+Python的各个模块已经被打包并上传到许多网站，推荐到sourceforge和豆瓣镜像站下载，网址分别为：SourceForge - Download, Develop and Publish Free Open Source Software和http://pypi.douban.com/simple/。如果您不希望下载的话，在提交的文档的压缩包中也有这两个模块。下载好包以后，解压到某个位置，然后通过dos命令进入该文件夹中。比如我将numpy解压到桌面，文件夹名“numpy-1.11.1”。打开命令提示符界面，输入“cd Desktop\numpy-1.11.1”，回车，则进入文件夹。输入“dir”并回车可以看到文件夹下各个文件的信息，可以看到有一个叫“setup.py”的文件，输入“python setup.py install”并回车，就可以安装好numpy模块了。matplotlib的安装类似。
+
+③ 使用Pycharm安装
+
+Pycharm是一款非常流行的Python的编译器。从PyCharm可以下载免费版，对于专业版貌似可以找到注册码破解。安装时基本可以默认安装。安装完后第一次运行时有可能它找不着之前您之前安装好的Python，此时需要您手动添加。此时打开它的设置（settings）里的interpreter，然后点开旁边的“add local”,再输入python.exe的路径。如果您按照之前的步骤进行了，那么您应该保存了Python的默认安装路径。如果没有，请在“开始→程序”中找到Python，并复制其路径，在路径的最后加上“\python.exe”。然后Pycharm就会自动配置Python，此过程可能较长。Pycharm配置完后，点开“File→settings→Project→Project interpreter”，通过“+”可以搜索并按照模块。
