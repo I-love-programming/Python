@@ -1,0 +1,46 @@
+#Python中str.maketrans()和str.translate()的用法
+
+1	官方文档解释：
+
+str.maketrans(x[,y[,z]])
+
+	This static method returns a translation table usable for str.translate().
+
+	If there is only one argument, it must be a dictionary mapping Unicode ordinals (integers) or characters (strings of length 1) to Unicode ordinals, strings (of arbitrary lengths) or None. Character keys will then be converted to ordinals.
+
+	If there are two arguments, they must be strings of equal length, and in the resulting dictionary, each character in x will be mapped to the character at the same position in y. If there is a third argument, it must be a string, whose characters will be mapped to None in the result.
+	
+	注：对于单字节的符号，字节的第一位设为0，后面7位为这个符号的 Unicode 码。因此对于英语字母，UTF-8 编码和 ASCII 码是相同的。
+
+str.translate(table)
+
+	Return a copy of the string in which each character has been mapped through the given translation table. The table must be an object that implements indexing via __getitem__(), typically a mapping or sequence. When indexed by a Unicode ordinal (an integer), the table object can do any of the following: return a Unicode ordinal or a string, to map the character to one or more other characters; return None, to delete the character from the return string; or raise a LookupError exception, to map the character to itself.
+
+	You can use str.maketrans() to create a translation map from character-to-character mappings in different formats.
+	
+2	个人解读
+
+1）作用：两种method配合使用，对字符串进行替换和删除操作。
+2）使用方法：string=str.translate(str.maketrans(x,y,z))，返回一个字符串，将原字符串str中的x替换成y，删除z。
+3）官方文档解读：str.maketrans()方法返回一个table（翻译表），用于str.translate(table)。
+	只有1个参数x时，x必须为一个字典，该字典中的key-value pairs可以为：
+		Unicode码（为一个整型数字）：Unicode码      str.maketrans({97:98})将'a'替换成'b'
+		Unicode码：字符串（单个字符或者任意长度字符串）     str.maketrans({97:'b'})将'a'替换成'b'
+		Unicode码：None
+		或者
+		character（单个字符）：Unicode码    str.maketrans({'a':98})将'a'替换成'b'
+		character（单个字符）：字符串（单个字符或者任意长度字符串）  str.maketrans({'a':'b'})将'a'替换成'b'
+		character（单个字符）：None
+		或者
+		多个key-value pairs：str.maketrans({97:'b','c':100,'!':'?'})
+		
+	有2个参数x和y时，x和y必须为长度相同的字符串。
+		str.maketrans('abcd','1234')分别将str中的a替换成1，b替换成2，c替换成3，d替换成4。
+		str.maketrans('text','1234')'t'分别对应2个替换字符'1'和'4'，Python3.7.0中以后一个替换字符为准，即't'替换为'4'。
+	
+	有3个参数x，y和z时，z只能是一个字符串，并被映射为None，即表示删除str中的z。
+		str.maketrans(x,y,'abc')删除str中的'a','b','c'。
+	
+	table=str.translate()作为参数直接赋值给str.maketrans()即可。
+
+
